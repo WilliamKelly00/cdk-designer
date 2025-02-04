@@ -1,4 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Overview
+
+This project converts architecture diagrams into fully functional AWS CDK (Cloud Development Kit) code, making infrastructure-as-code (IaC) deployment seamless and automated. By analyzing architectural representations, the tool generates CDK stacks that are ready to be deployed in AWS environments.
+
+Features
+
+- Diagram Parsing: Extracts infrastructure components from architecture diagrams.
+
+- CDK Code Generation: Converts extracted components into AWS CDK constructs.
+
+- Infrastructure as Code (IaC): Ensures consistent and reproducible deployments.
+
+- Customizable Templates: Supports modifications to generated CDK code.
+
 
 ## Getting Started
 
