@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { editor } from 'monaco-editor';
 import { Editor } from '@monaco-editor/react';
+import { OVERLAY_POSITION_STYLE, OVERLAY_Z_INDEX } from '@/Constants';
 
 interface MonacoEditorProps {
   defaultValue: string;
@@ -13,11 +14,11 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = ({ defaultValue }) => {
     <Editor
       wrapperProps={{
         style: {
-          position: 'absolute',
+          position: OVERLAY_POSITION_STYLE,
+          zIndex: OVERLAY_Z_INDEX,
           top: '70px',
           right: '10px',
           width: '30vw',
-          zIndex: 1000,
           height: 'calc(100vh - 70px)',
           display: 'flex',
         },

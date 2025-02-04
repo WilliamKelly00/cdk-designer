@@ -1,5 +1,5 @@
-import ExcalidrawWrapper from '@/components/WhiteBoardComponent';
+import WhiteBoard from '@/components/WhiteBoardComponent';
 
 export default function Home() {
-  return <ExcalidrawWrapper />;
+  return <WhiteBoard />;
 }

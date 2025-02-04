@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { ExportButton } from './buttons/ExportButton';
 import { LIBRARY_STYLE } from '@/Constants';
 
-const ExcalidrawWrapper: React.FC = () => {
+const WhiteBoard: React.FC = () => {
   const [excalidrawAPI, setExcalidrawAPI] =
     useState<ExcalidrawImperativeAPI | null>(null);
 
@@ -17,4 +17,4 @@ const ExcalidrawWrapper: React.FC = () => {
     </div>
   );
 };
-export default ExcalidrawWrapper;
+export default WhiteBoard;

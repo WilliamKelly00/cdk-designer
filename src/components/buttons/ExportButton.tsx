@@ -2,7 +2,6 @@ import { ExcalidrawImperativeAPI } from '@excalidraw/excalidraw/types/types';
 import { useState, useEffect } from 'react';
 import exportCanvasToBlob from '@/utils/export/canvas';
 import toBase64 from '@/utils/export/base64';
-// import OverlayButton from './OverlayButton';
 import Button from '@mui/material/Button';
 import { OVERLAY_POSITION_STYLE, OVERLAY_Z_INDEX } from '@/Constants';
 import MonacoEditor from '../editor/Editor';
@@ -51,11 +50,11 @@ export const ExportButton: React.FC<ExportButtonProps> = ({
         disabled={isProcessing}
         style={{
           position: OVERLAY_POSITION_STYLE,
+          zIndex: OVERLAY_Z_INDEX,
           top: windowWidth < 900 ? 'calc(99vh - 100px)' : '15px',
           left: windowWidth < 900 ? '50%' : 'auto',
           right: windowWidth < 900 ? 'auto' : '10px',
           transform: windowWidth < 900 ? 'translateX(-50%)' : 'none',
-          zIndex: OVERLAY_Z_INDEX,
         }}
       >
         {isProcessing ? 'Processing...' : 'Create Cdk'}
