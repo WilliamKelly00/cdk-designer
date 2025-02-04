@@ -1,3 +1,4 @@
+import { PROMPT } from '@/Constants';
 import { ProxyResponse } from '@/utils/requests/Proxy';
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
@@ -18,7 +19,7 @@ export async function POST(
           content: [
             {
               type: 'text',
-              text: 'Given the architecture described in this image, generate the corresponding AWS CDK code. Provide only the code snippet.',
+              text: PROMPT,
             },
             {
               type: 'image_url',
