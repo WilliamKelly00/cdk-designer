@@ -1,2 +1,3 @@
 export const OVERLAY_POSITION_STYLE = 'absolute';
 export const OVERLAY_Z_INDEX = '1000';
+export const LIBRARY_STYLE = `label[title="Library"] { display: none; }`;
