@@ -23,9 +23,6 @@ export default async function exportCanvasToBlob(
       ...initialData.appState,
     },
     files: excalidrawAPI.getFiles(),
-    getDimensions: () => {
-      return { width: 350, height: 350 };
-    },
   });
 
   return canvas;

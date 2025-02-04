@@ -11,10 +11,9 @@ const ExcalidrawWrapper: React.FC = () => {
 
   return (
     <div style={{ height: '100vh', width: '100vw', position: 'relative' }}>
-        <style>{LIBRARY_STYLE}</style>
+      <style>{LIBRARY_STYLE}</style>
       <ExportButton excalidrawAPI={excalidrawAPI} />
-      <Excalidraw excalidrawAPI={(api) => setExcalidrawAPI(api)} >
-      </Excalidraw>
+      <Excalidraw excalidrawAPI={(api) => setExcalidrawAPI(api)}></Excalidraw>
     </div>
   );
 };

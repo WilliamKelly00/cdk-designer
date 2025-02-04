@@ -5,6 +5,7 @@ import toBase64 from '@/utils/export/base64';
 // import OverlayButton from './OverlayButton';
 import Button from '@mui/material/Button';
 import { OVERLAY_POSITION_STYLE, OVERLAY_Z_INDEX } from '@/Constants';
+import MonacoEditor from '../editor/Editor';
 
 interface ExportButtonProps {
   excalidrawAPI: ExcalidrawImperativeAPI | null;
@@ -43,36 +44,23 @@ export const ExportButton: React.FC<ExportButtonProps> = ({
 
   return (
     <div style={{ position: 'relative' }}>
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={handleExportClick}
-      disabled={isProcessing}
-      style={{
-        position: OVERLAY_POSITION_STYLE,
-        top: windowWidth < 900 ? 'calc(99vh - 100px)' : '15px',
-        left: windowWidth < 900 ? '50%' : 'auto',
-        right: windowWidth < 900 ? 'auto' : '10px',
-        transform: windowWidth < 900 ? 'translateX(-50%)' : 'none',
-        zIndex: OVERLAY_Z_INDEX,
-      }}
-    >
-      {isProcessing ? 'Processing...' : 'Create Cdk'}
-    </Button>
-      {base64String && (
-        <textarea
-          readOnly
-          value={base64String}
-          rows={5}
-          cols={50}
-          style={{
-            position: 'absolute',
-            top: '70px',
-            right: '10px',
-            zIndex: 1000,
-          }}
-        />
-      )}
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleExportClick}
+        disabled={isProcessing}
+        style={{
+          position: OVERLAY_POSITION_STYLE,
+          top: windowWidth < 900 ? 'calc(99vh - 100px)' : '15px',
+          left: windowWidth < 900 ? '50%' : 'auto',
+          right: windowWidth < 900 ? 'auto' : '10px',
+          transform: windowWidth < 900 ? 'translateX(-50%)' : 'none',
+          zIndex: OVERLAY_Z_INDEX,
+        }}
+      >
+        {isProcessing ? 'Processing...' : 'Create Cdk'}
+      </Button>
+      {base64String && <MonacoEditor defaultValue={base64String} />}
     </div>
   );
 };
