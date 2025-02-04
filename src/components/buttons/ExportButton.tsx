@@ -14,7 +14,7 @@ export const ExportButton: React.FC<ExportButtonProps> = ({
   excalidrawAPI,
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [base64String, setBase64String] = useState<string | null>(null);
+  const [cdkCode, setCdkCode] = useState<string | null>(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -32,12 +32,29 @@ export const ExportButton: React.FC<ExportButtonProps> = ({
       if (!blob) throw new Error('Failed to generate blob');
 
       const base64 = await toBase64(blob);
-      setBase64String(base64);
       console.log('Base64 Encoded Data:', base64);
+
+      const response = await fetch('/api/proxy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ base64EncodedImage: base64 }),
+      });
+
+      const { data, error } = await response.json();
+
+      if (error) {
+        console.error('Error generating CDK code:', error);
+        return;
+      }
+
+      console.log('CDK Code:', data);
+      setCdkCode(data);
     } catch (error) {
-      console.error('Error exporting canvas:', error);
+      console.error('Error:', error);
     } finally {
-      setIsProcessing(false);
+      //   setIsProcessing(false);
     }
   };
 
@@ -59,7 +76,7 @@ export const ExportButton: React.FC<ExportButtonProps> = ({
       >
         {isProcessing ? 'Processing...' : 'Create Cdk'}
       </Button>
-      {base64String && <MonacoEditor defaultValue={base64String} />}
+      {cdkCode && <MonacoEditor defaultValue={cdkCode} />}
     </div>
   );
 };
