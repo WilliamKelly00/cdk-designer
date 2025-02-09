@@ -3,8 +3,6 @@ import React from 'react';
 
 const Workplace: React.FC = () => {
     const handleCreateProject = () => {
-        // Logic to create a new project
-        console.log('Create a new project');
     };
 
     return (

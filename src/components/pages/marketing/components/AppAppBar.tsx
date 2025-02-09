@@ -54,8 +54,7 @@ function useUserSession(initialUser: User) {
 			const serviceWorkerUrl = `/auth-service-worker.js?firebaseConfig=${serializedFirebaseConfig}`
 		
 		  navigator.serviceWorker
-			.register(serviceWorkerUrl)
-			.then((registration) => console.log("scope is: ", registration.scope));
+			.register(serviceWorkerUrl);
 		}
 	  }, []);
 
@@ -95,7 +94,6 @@ export default function AppAppBar(initialUser: User) {
     };
 
     const handleSignIn = event => {
-      console.log("clicked");
       event.preventDefault();
       signInWithGoogle();
     };

@@ -35,7 +35,6 @@ export const ExportButton: React.FC<ExportButtonProps> = ({
       if (!blob) throw new Error('Failed to generate blob');
 
       const base64 = await toBase64(blob);
-      console.log('Base64 Encoded Data:', base64);
 
       if (isBase64StringUnderSizeLimit(base64, IMAGE_SIZE_LIMIT)) {
         const response = await fetch('/api/proxy', {
@@ -87,7 +86,6 @@ export const ExportButton: React.FC<ExportButtonProps> = ({
         {isProcessing ? 'Processing...' : 'Create Cdk'}
       </Button>
       {cdkCode && <MonacoEditor defaultValue={cdkCode} />}
-
       <Modal
               open={isModalOpen}
               onClose={handleCloseModal}

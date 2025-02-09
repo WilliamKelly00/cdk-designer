@@ -40,7 +40,8 @@ export async function POST(
       ],
       store: true,
     });
-    console.log(response);
+
+    // return NextResponse.json({data: 'hello world!'}, {status: 200})
 
     if (
       !response.choices[0].message.content ||
