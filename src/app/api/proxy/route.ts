@@ -4,10 +4,16 @@ import { PROMPT } from '@/Constants';
 import { ProxyResponse } from '@/app/lib/requests/Proxy';
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { rateLimit } from '@/app/middleware/rateLimit';
 
 export async function POST(
   req: NextRequest,
 ): Promise<NextResponse<ProxyResponse>> {
+  const rateLimitResponse = await rateLimit(req);
+  if (rateLimitResponse) {
+    return NextResponse.json({data:''}, rateLimitResponse)
+  }
+
   try {
     const { base64EncodedImage } = await req.json();
 

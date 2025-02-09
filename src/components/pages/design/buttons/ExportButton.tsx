@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { IMAGE_SIZE_LIMIT, OVERLAY_POSITION_STYLE, OVERLAY_Z_INDEX } from '@/Constants';
 import MonacoEditor from '../editor/Editor';
 import { isBase64StringUnderSizeLimit } from '@/app/lib/export/exportImageValidator';
+import { Box, Modal, Typography } from '@mui/material';
 
 interface ExportButtonProps {
   excalidrawAPI: ExcalidrawImperativeAPI | null;
@@ -17,6 +18,7 @@ export const ExportButton: React.FC<ExportButtonProps> = ({
   const [isProcessing, setIsProcessing] = useState(false);
   const [cdkCode, setCdkCode] = useState<string | null>(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -53,15 +55,17 @@ export const ExportButton: React.FC<ExportButtonProps> = ({
 
         setCdkCode(data);
       } else {
-        // upgrade your plan
+        setIsModalOpen(true);
       }
-
-
     } catch (error) {
       console.error('Error:', error);
     } finally {
-      //   setIsProcessing(false);
+        setIsProcessing(false);
     }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -83,6 +87,37 @@ export const ExportButton: React.FC<ExportButtonProps> = ({
         {isProcessing ? 'Processing...' : 'Create Cdk'}
       </Button>
       {cdkCode && <MonacoEditor defaultValue={cdkCode} />}
+
+      <Modal
+              open={isModalOpen}
+              onClose={handleCloseModal}
+              aria-labelledby="modal-title"
+              aria-describedby="modal-description"
+            >
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: 400,
+                  bgcolor: 'background.paper',
+                  border: '2px solid #000',
+                  boxShadow: 24,
+                  p: 4,
+                }}
+              >
+                <Typography id="modal-title" variant="h6" component="h2" style={{ color: 'black' }}>
+                  Image Too Large
+                </Typography>
+                <Button onClick={handleCloseModal} style={{ position: 'absolute', top: 8, right: 8 }}>
+                  X
+                </Button>
+                <Typography id="modal-description" style={{ color: 'black' }} sx={{ mt: 2 }}>
+                  The image exceeds the size limit. Please try with a smaller image.
+                </Typography>
+              </Box>
+            </Modal>
     </div>
   );
 };

@@ -20,6 +20,7 @@ const tiers = [
     description: [
       'Convert designs into AWS CDK code',
       'Limited design size',
+      'Limited conversions',
       'Email support',
     ],
     buttonText: 'Sign up for free',
@@ -33,7 +34,7 @@ const tiers = [
     price: '50',
     description: [
       '20 users included',
-      'Securely saved on cloud',
+      'Progress securely saved on cloud',
       'Help center access',
       'Priority email support',
       'Best deals',
