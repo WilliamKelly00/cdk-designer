@@ -65,7 +65,7 @@ const tiers = [
   },
 ];
 
-export default function Pricing(initialUser: User) {
+export default function Pricing(props: {initialUser: User}) {
   return (
     <Container
       id="pricing"
@@ -203,7 +203,7 @@ export default function Pricing(initialUser: User) {
                   color={tier.buttonColor as 'primary' | 'secondary'}
                   onClick={tier.onClick}
                 >
-                    {initialUser ? tier.signedInText : tier.buttonText}
+                    {props.initialUser ? tier.signedInText : tier.buttonText}
                 </Button>
               </CardActions>
             </Card>

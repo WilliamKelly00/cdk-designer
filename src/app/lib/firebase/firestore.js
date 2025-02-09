@@ -7,8 +7,8 @@ import {
 
 import { db } from "@/src/lib/firebase/clientApp";
 
-export async function getDesignsForUser(db = db, userId) {
-    let q = query(collection(db, "designs"));
+export async function getDesignsForUser(database = db, userId) {
+    let q = query(collection(database, "designs"));
 
     q = query(q, where("userId", "==", userId))
 

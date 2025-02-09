@@ -22,6 +22,7 @@ import {
 	signOut,
 	onAuthStateChanged
 } from "@/app/lib/firebase/auth";
+import type {} from '@mui/material/themeCssVarsAugmentation';
 import Avatar from '@mui/material/Avatar';
 import Link from 'next/link';
 
@@ -82,18 +83,22 @@ function useUserSession(initialUser: User) {
 	return user;
 }
 
-export default function AppAppBar(initialUser: User) {
+export default function AppAppBar(props: {initialUser: User}) {
   const [open, setOpen] = React.useState(false);
 
 
-  const user = useUserSession(initialUser) ;
+  const user = useUserSession(props.initialUser);
 
-    const handleSignOut = event => {
+    interface HandleEvent {
+      (event: React.MouseEvent<HTMLButtonElement>): void;
+    }
+
+    const handleSignOut: HandleEvent = (event) => {
       event.preventDefault();
       signOut();
     };
 
-    const handleSignIn = event => {
+    const handleSignIn: HandleEvent = (event) => {
       event.preventDefault();
       signInWithGoogle();
     };
