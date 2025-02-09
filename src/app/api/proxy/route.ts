@@ -41,8 +41,6 @@ export async function POST(
       store: true,
     });
 
-    // return NextResponse.json({data: 'hello world!'}, {status: 200})
-
     if (
       !response.choices[0].message.content ||
       response.choices[0].message.content === 'No response from the model'
