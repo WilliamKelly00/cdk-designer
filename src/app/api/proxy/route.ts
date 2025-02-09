@@ -1,5 +1,7 @@
+import "server-only";
+
 import { PROMPT } from '@/Constants';
-import { ProxyResponse } from '@/utils/requests/Proxy';
+import { ProxyResponse } from '@/app/lib/requests/Proxy';
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 

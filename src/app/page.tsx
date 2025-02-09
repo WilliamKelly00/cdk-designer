@@ -1,5 +1,9 @@
-import WhiteBoard from '@/components/WhiteBoardComponent';
+import MarketingPage from "@/components/pages/marketing/MarketingPage";
+import { getAuthenticatedAppForUser } from "@/app/lib/firebase/serverApp";
 
-export default function Home() {
-  return <WhiteBoard />;
+
+export default async function Page() {
+  const { currentUser } = await getAuthenticatedAppForUser();
+
+  return <MarketingPage initialUser={currentUser?.toJSON()}/>
 }

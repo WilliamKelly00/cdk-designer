@@ -1,10 +1,11 @@
 import { ExcalidrawImperativeAPI } from '@excalidraw/excalidraw/types/types';
 import { useState, useEffect } from 'react';
-import exportCanvasToBlob from '@/utils/export/canvas';
-import toBase64 from '@/utils/export/base64';
+import exportCanvasToBlob from '@/app/lib/export/canvas';
+import toBase64 from '@/app/lib/export/base64';
 import Button from '@mui/material/Button';
-import { OVERLAY_POSITION_STYLE, OVERLAY_Z_INDEX } from '@/Constants';
+import { IMAGE_SIZE_LIMIT, OVERLAY_POSITION_STYLE, OVERLAY_Z_INDEX } from '@/Constants';
 import MonacoEditor from '../editor/Editor';
+import { isBase64StringUnderSizeLimit } from '@/app/lib/export/exportImageValidator';
 
 interface ExportButtonProps {
   excalidrawAPI: ExcalidrawImperativeAPI | null;
@@ -34,23 +35,28 @@ export const ExportButton: React.FC<ExportButtonProps> = ({
       const base64 = await toBase64(blob);
       console.log('Base64 Encoded Data:', base64);
 
-      const response = await fetch('/api/proxy', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ base64EncodedImage: base64 }),
-      });
+      if (isBase64StringUnderSizeLimit(base64, IMAGE_SIZE_LIMIT)) {
+        const response = await fetch('/api/proxy', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ base64EncodedImage: base64 }),
+        });
 
-      const { data, error } = await response.json();
+        const { data, error } = await response.json();
 
-      if (error) {
-        console.error('Error generating CDK code:', error);
-        return;
+        if (error) {
+          console.error('Error generating CDK code:', error);
+          return;
+        }
+
+        setCdkCode(data);
+      } else {
+        // upgrade your plan
       }
 
-      console.log('CDK Code:', data);
-      setCdkCode(data);
+
     } catch (error) {
       console.error('Error:', error);
     } finally {
